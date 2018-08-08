@@ -45,17 +45,15 @@ class ApiClient:
         return token
 
     def upload_file(self):
-        http.upload_file()
+        raise NotImplementedError
 
 
+    # TODO: make sure the file is downloaded properly
     def download_file(self, image_id):
         token = self.get_jwt_token()
 
         headers = {"Authorization":"Bearer " + token}
-
         result = requests.get(IMGY_API_ENDPOINT + 'image/' +  image_id,headers=headers).json()
-
         file = requests.get(result['signedURL'])
 
-        print(file)
-            
+        return file
